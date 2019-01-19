@@ -254,11 +254,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 50493353641545646, guid: ac87041821e688c4d9faf554deb2edd2,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 8c43b54a59a0cb9489da4020d12efd13, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac87041821e688c4d9faf554deb2edd2, type: 2}
   m_IsPrefabParent: 0
@@ -2271,6 +2266,11 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
+--- !u!1 &1053479253 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1835847134645672, guid: ac87041821e688c4d9faf554deb2edd2,
+    type: 2}
+  m_PrefabInternal: {fileID: 427556291}
 --- !u!1 &1493750223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,6 +2282,7 @@ GameObject:
   - component: {fileID: 1493750226}
   - component: {fileID: 1493750225}
   - component: {fileID: 1493750224}
+  - component: {fileID: 1493750228}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2352,6 +2353,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1493750228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1493750223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e582ec9598b92ee4484f1efe67d00ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  watchObject: {fileID: 1053479253}
 --- !u!1 &1721370847
 GameObject:
   m_ObjectHideFlags: 0
