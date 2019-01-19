@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -18,6 +17,12 @@ public class GameController : MonoBehaviour
 		if (Input.GetKey(KeyCode.Q))
         {
             Application.Quit();
+        }
+
+        //перезагрузка сцены
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 	}
 }
