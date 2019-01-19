@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     public float maxSpeed = 5f;				//максимальная скорость перемещения
     public float jumpForce = 1000f;         //сила прыжка
 
-    private new Rigidbody2D rigidbody;
+    private Rigidbody2D rigidbody;
     private Transform groundCheck;
     private bool grounded = false;          //стоит ли игрок на земле
     private Animator animator;
