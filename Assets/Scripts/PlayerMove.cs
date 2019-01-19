@@ -14,12 +14,14 @@ public class PlayerMove : MonoBehaviour
     private new Rigidbody2D rigidbody;
     private Transform groundCheck;
     private bool grounded = false;          //стоит ли игрок на земле
+    private Animator animator;
 
     // Use this for initialization
     void Awake ()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("groundCheck");
+        animator = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -36,6 +38,8 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
+
+        animator.SetFloat("speed", Mathf.Abs(h));
 
         //перемещение игрока
         if (h * rigidbody.velocity.x < maxSpeed)

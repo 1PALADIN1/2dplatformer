@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 50493353641545646}
   - component: {fileID: 70178941611863790}
   - component: {fileID: 114996373219900446}
+  - component: {fileID: 95915221582326820}
   m_Layer: 0
   m_Name: hero
   m_TagString: Untagged
@@ -107,6 +108,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.011684775, y: 1.2344658}
   m_Size: {x: 1.1097662, y: 2.5140767}
   m_Direction: 0
+--- !u!95 &95915221582326820
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835847134645672}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e30ab4cf8604ee14490873fa19cdea1d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114996373219900446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,7 +175,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 100e7c34f90b62e468f5c1d5c42b0af9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe391138f5b458744b2043693464deed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
