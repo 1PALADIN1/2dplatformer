@@ -32,6 +32,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
+            animator.SetBool("jump", jump);
         }
     }
 
@@ -40,6 +41,7 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
 
         animator.SetFloat("speed", Mathf.Abs(h));
+        animator.SetBool("grounded", jump ? false : grounded);
 
         //перемещение игрока
         if (h * rigidbody.velocity.x < maxSpeed)
@@ -62,6 +64,7 @@ public class PlayerMove : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
             jump = false;
+            animator.SetBool("jump", jump);
         }
     }
 
