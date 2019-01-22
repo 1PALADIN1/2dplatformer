@@ -138,8 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   jump: 0
-  moveForce: 365
-  maxSpeed: 7
+  moveSpeed: 10
   jumpForce: 700
 --- !u!212 &212892913175593602
 SpriteRenderer:
