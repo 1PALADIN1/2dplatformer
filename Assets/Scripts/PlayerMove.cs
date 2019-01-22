@@ -16,6 +16,17 @@ public class PlayerMove : MonoBehaviour
     private Transform groundCheck;
     private bool grounded = false;          //стоит ли игрок на земле
     private Animator animator;              //компонент Animator объекта
+
+    public int Direction
+    {
+        get
+        {
+            if (facingRight) return 1;
+            else
+                return -1;
+        }
+    }
+
     
     void Awake ()
     {

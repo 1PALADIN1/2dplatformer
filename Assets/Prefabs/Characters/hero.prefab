@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1835847134645672}
   m_IsPrefabParent: 1
+--- !u!1 &1238996039500374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4872834126830594}
+  m_Layer: 0
+  m_Name: bulletStartPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: -982381405332843317, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1574374713939586
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,6 +53,7 @@ GameObject:
   - component: {fileID: 50493353641545646}
   - component: {fileID: 70178941611863790}
   - component: {fileID: 114996373219900446}
+  - component: {fileID: 114530081428141372}
   - component: {fileID: 95915221582326820}
   m_Layer: 0
   m_Name: hero
@@ -57,7 +73,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4292433694243058}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4292433694243058
 Transform:
@@ -69,8 +85,22 @@ Transform:
   m_LocalPosition: {x: -5.25, y: -0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4872834126830594}
   - {fileID: 4130745783308432}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4872834126830594
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238996039500374}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.029, y: 1.138, z: 0.25585938}
+  m_LocalScale: {x: 0.6354687, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4292433694243058}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50493353641545646
@@ -125,6 +155,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114530081428141372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835847134645672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a81a98ea57d354bb7c680f76e5d8ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1082084250968000, guid: 5c8fc43f5fc60924daa26ae27d9fd557, type: 2}
+  startPosition: {fileID: 4872834126830594}
 --- !u!114 &114996373219900446
 MonoBehaviour:
   m_ObjectHideFlags: 1
