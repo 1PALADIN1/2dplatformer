@@ -16,4 +16,13 @@ public class BulletController : MonoBehaviour {
         //перемещение по оси X
         transform.Translate(direction * moveSpeed * Time.deltaTime, 0, 0, Space.Self);
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //если сталкиваемся с объектом, помеченным тэгом Enemy
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
