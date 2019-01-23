@@ -8,13 +8,9 @@ public class PlayerStrike : MonoBehaviour {
     private GameObject bullet;          //пуля
     [SerializeField]
     private Transform startPosition;    //откуда будут появлятся пули
-
-	void Awake () {
-		
-	}
-
+    
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.J))
+		if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
         {
             if (bullet != null)
             {
