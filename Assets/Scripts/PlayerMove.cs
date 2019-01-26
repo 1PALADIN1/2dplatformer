@@ -7,76 +7,78 @@ public class PlayerMove : MonoBehaviour
     [HideInInspector]
     public bool jump = false;               //нажата ли клавиша прыжка
 
-    public float moveForce = 365f;          //сила, которая прикладывается для перемещения игрока 
-    public float maxSpeed = 5f;				//максимальная скорость перемещения
-    public float jumpForce = 1000f;         //сила прыжка
+    [SerializeField]
+    private float moveSpeed = 5.0f;         //скорость перемещения игрока
+    [SerializeField]
+    private float jumpForce = 1000f;         //сила прыжка
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D rigidbody;          //компонент Rigidbody объекта
     private Transform groundCheck;
     private bool grounded = false;          //стоит ли игрок на земле
-    private Animator animator;
+    private Animator animator;              //компонент Animator объекта
 
-    // Use this for initialization
+    public int Direction
+    {
+        get
+        {
+            if (facingRight) return 1;
+            else
+                return -1;
+        }
+    }
+
+    
     void Awake ()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("groundCheck");
         animator = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
+
 	void Update ()
     {
+        //чтение ввода
+        var axisHor = Input.GetAxis("Horizontal");
+
+        //передаём в аниматор текущее значение axis по модулю (для смены анимации с Idle -> Run и наоборот)
+        animator.SetFloat("speed", Mathf.Abs(axisHor));
+
+        //перемещение объекта
+        transform.Translate(axisHor * moveSpeed * Time.deltaTime, 0, 0, Space.Self);
+
+        if (axisHor > 0 && !facingRight)
+            Flip();
+        else if (axisHor < 0 && facingRight)
+            Flip();
+
         //проверка соприкасается ли игрок с землёй
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         if (Input.GetButtonDown("Jump") && grounded)
-        {
             jump = true;
-            animator.SetBool("jump", jump);
-        }
     }
 
     private void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-
-        animator.SetFloat("speed", Mathf.Abs(h));
-        animator.SetBool("grounded", jump ? false : grounded);
-
-        //перемещение игрока
-        if (h * rigidbody.velocity.x < maxSpeed)
-        {
-            rigidbody.AddForce(Vector2.right * h * moveForce);
-        }
-
-        if (Mathf.Abs(rigidbody.velocity.x) > maxSpeed)
-        {
-            rigidbody.velocity = new Vector2(Mathf.Sign(rigidbody.velocity.x) * maxSpeed, rigidbody.velocity.y);
-        }
-
-        if (h > 0 && !facingRight)
-            Flip();
-        else if (h < 0 && facingRight)
-            Flip();
-
         //обработка прыжка
         if (jump)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
             jump = false;
-            animator.SetBool("jump", jump);
         }
     }
 
     /// <summary>
-    /// Зеркальное отражение спрайта
+    /// Зеркальное отражение спрайта (разворот)
     /// </summary>
     void Flip()
     {
         facingRight = !facingRight;
         
+        //получаем вектор масштабирования
         Vector3 theScale = transform.localScale;
+        //зеркально отражаем вектор по оси X
         theScale.x *= -1;
+        //присваиваем новое значение для масштабирования
         transform.localScale = theScale;
     }
 }
