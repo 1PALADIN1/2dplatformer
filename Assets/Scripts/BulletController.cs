@@ -8,15 +8,22 @@ public class BulletController : MonoBehaviour {
     public int direction = 1;           //направление движения
     public int damage = 4;              //наносимый урон
 
-	void Start () {
+    private Rigidbody2D rigidbody2d;    //компонент Rigidbody объекта
+    private Vector2 verticalMove;       //темповый вектор для перемещения (чтобы не плодить тысячу объектов типа Vector2)
+
+    private void Start () {
+        rigidbody2d = GetComponent<Rigidbody2D>();
+        verticalMove = new Vector2();
         //уничтожение объекта через 3 секунды после появления
         Destroy(gameObject, 3.0f);
 	}
-	
-	void Update () {
-        //перемещение по оси X
-        transform.Translate(direction * moveSpeed * Time.deltaTime, 0, 0, Space.Self);
-	}
+
+    private void FixedUpdate()
+    {
+        //перемещение пули
+        verticalMove.Set(direction * moveSpeed, rigidbody2d.velocity.y);
+        rigidbody2d.velocity = verticalMove;
+    }
 
     /// <summary>
     /// Проверка на столкновения с другими объектами
@@ -25,6 +32,7 @@ public class BulletController : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var collisionGO = collision.gameObject;
+
         //если сталкиваемся с объектом, помеченным тэгом Enemy
         if (collision.gameObject.tag == "Enemy")
         {
@@ -37,6 +45,11 @@ public class BulletController : MonoBehaviour {
             {
                 enemyHealth.TakeDamage(damage);
             }
+        }
+        //если сталкиваемся с землёй, то пуля уничтожается
+        if (collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
         }
     }
 }
