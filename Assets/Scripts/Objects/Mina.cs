@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Mina : MonoBehaviour
 {
@@ -26,22 +24,25 @@ public class Mina : MonoBehaviour
     /// <param name="collision">Объект Collision2D того, кто находится в радиусе поражения</param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag.Equals("Enemy") || collision.gameObject.tag.Equals("Player"))
         {
             Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+            //здоровье
             Health health = collision.GetComponent<Health>();
+
             if (rb != null)
             {
                 //обнуляем скорость перемещения
                 rb.velocity = Vector2.zero;
                 //отталкиваем объекты
-                rb.AddForce((collision.transform.position - transform.position).normalized * pushForce, ForceMode2D.Impulse);
+                Vector3 tmp = (collision.transform.position - transform.position).normalized;
+                rb.AddForce(new Vector2(tmp.x * pushForce, tmp.y * pushForce), ForceMode2D.Impulse);
+
+                print(tmp + " " + collision.gameObject.tag);
             }
             //наносим урон
             if (health != null)
-            {
                 health.TakeDamage(damage);
-            }
         }
 
         Destroy(gameObject);
@@ -53,7 +54,7 @@ public class Mina : MonoBehaviour
     /// <param name="collision">Объект Collision2D того, кто наступил</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag.Equals("Enemy") || collision.gameObject.tag.Equals("Player"))
         {
             circleCollider.enabled = true;
         }

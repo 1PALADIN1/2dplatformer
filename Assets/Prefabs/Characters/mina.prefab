@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   pushForce: 15
+  delay: 2
 --- !u!212 &212063494406551424
 SpriteRenderer:
   m_ObjectHideFlags: 1
