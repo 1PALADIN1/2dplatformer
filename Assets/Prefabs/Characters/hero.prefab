@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 95915221582326820}
   m_Layer: 0
   m_Name: hero
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835847134645672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.25, y: -0.7, z: 0}
+  m_LocalPosition: {x: -9.02, y: -0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4872834126830594}
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1082084250968000, guid: 5c8fc43f5fc60924daa26ae27d9fd557, type: 2}
+  mina: {fileID: 1978606083670322, guid: 8acbbab7ccddc4e4882c6c31217f7695, type: 2}
   startPosition: {fileID: 4872834126830594}
 --- !u!114 &114996373219900446
 MonoBehaviour:
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   jump: 0
-  moveSpeed: 10
+  moveSpeed: 12
   jumpForce: 700
 --- !u!212 &212892913175593602
 SpriteRenderer:
