@@ -3,7 +3,7 @@
 public class Health : MonoBehaviour {
 
     [SerializeField]
-    private int health = 10;
+    private int _health = 10;
 
     /// <summary>
     /// Получение урона
@@ -11,8 +11,8 @@ public class Health : MonoBehaviour {
     /// <param name="damage">Урон</param>
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        _health -= damage;
+        if (_health <= 0)
         {
             Destroy(gameObject);
         }

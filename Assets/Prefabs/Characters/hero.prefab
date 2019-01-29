@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4872834126830594}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bulletStartPosition
   m_TagString: Untagged
   m_Icon: {fileID: -982381405332843317, guid: 0000000000000000d000000000000000, type: 0}
@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4130745783308432}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 114996373219900446}
   - component: {fileID: 114530081428141372}
   - component: {fileID: 95915221582326820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: hero
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1574374713939586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.08, z: 0}
+  m_LocalPosition: {x: 0, y: -1.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4292433694243058}
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1835847134645672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.02, y: -0.08, z: 0}
+  m_LocalPosition: {x: -9.11, y: 1.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4872834126830594}
@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238996039500374}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.029, y: 1.085, z: 0.25585938}
+  m_LocalPosition: {x: 1.029, y: -0.19, z: 0.25585938}
   m_LocalScale: {x: 0.6354687, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4292433694243058}
@@ -135,8 +135,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011684775, y: 1.2344658}
-  m_Size: {x: 1.1097662, y: 2.5140767}
+  m_Offset: {x: -0.011684775, y: -0.013836861}
+  m_Size: {x: 1.1097662, y: 2.4609566}
   m_Direction: 0
 --- !u!95 &95915221582326820
 Animator:
