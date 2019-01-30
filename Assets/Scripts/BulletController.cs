@@ -1,55 +1,46 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
-    public float moveSpeed = 5.0f;      //скорость перемещения
-    public int direction = 1;           //направление движения
-    public int damage = 4;              //наносимый урон
+    public float MoveSpeed = 5.0f;      //скорость перемещения
+    public int Direction = 1;           //направление движения
+    public int Damage = 4;              //наносимый урон
+    public LayerMask HitMask;           //с какими слоями должна взаимодействовать пуля
 
-    private Rigidbody2D rigidbody2d;    //компонент Rigidbody объекта
-    private Vector2 verticalMove;       //темповый вектор для перемещения (чтобы не плодить тысячу объектов типа Vector2)
+    private Rigidbody2D _rigidbody2d;   //компонент Rigidbody объекта
+    private Vector2 _verticalMove;      //темповый вектор для перемещения (чтобы не плодить тысячу объектов типа Vector2)
+    private RaycastHit2D _raycastHit2d; 
 
     private void Start () {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        verticalMove = new Vector2();
+        _rigidbody2d = GetComponent<Rigidbody2D>();
+        _verticalMove = new Vector2();
         //уничтожение объекта через 3 секунды после появления
         Destroy(gameObject, 3.0f);
 	}
 
     private void FixedUpdate()
     {
-        //перемещение пули
-        verticalMove.Set(direction * moveSpeed, rigidbody2d.velocity.y);
-        rigidbody2d.velocity = verticalMove;
-    }
+        //проверка на столкновения пули со слоями HitMask
+        //TODO убрать магические числа!
+        _raycastHit2d = Physics2D.CircleCast(transform.position, 0.09f, Vector2.right * Direction, 1.0f, HitMask);
 
-    /// <summary>
-    /// Проверка на столкновения с другими объектами
-    /// </summary>
-    /// <param name="collision">Компонент Collision2D объекта, с которым столкнулись</param>
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        var collisionGO = collision.gameObject;
-
-        //если сталкиваемся с объектом, помеченным тэгом Enemy
-        if (collision.gameObject.tag == "Enemy")
+        //если есть столкновения с кем-то из списка слоёв
+        if (_raycastHit2d.collider != null)
         {
-            //уничтожаем пулю
-            Destroy(gameObject);
-            //берём компоненту здоровья у противника
-            Health enemyHealth = collisionGO.GetComponent<Health>();
-            //если у противника есть компонента, то наносим противнику урон
-            if (enemyHealth != null)
+            if (_raycastHit2d.collider.tag.Equals("Enemy"))
             {
-                enemyHealth.TakeDamage(damage);
+                Health enemyHealth = _raycastHit2d.collider.GetComponent<Health>();
+                //если у противника есть компонента здоровья, то наносим противнику урон
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(Damage);
+                }
             }
-        }
-        //если сталкиваемся с землёй, то пуля уничтожается
-        if (collision.gameObject.tag == "Ground")
-        {
             Destroy(gameObject);
         }
+
+        //перемещение пули
+        _verticalMove.Set(Direction * MoveSpeed, _rigidbody2d.velocity.y);
+        _rigidbody2d.velocity = _verticalMove;
     }
 }

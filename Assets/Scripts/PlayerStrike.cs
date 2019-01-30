@@ -1,34 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStrike : MonoBehaviour {
 
     [SerializeField]
-    private GameObject bullet;          //пуля
+    private GameObject _bullet;         //пуля
     [SerializeField]
-    private GameObject mina;            //мина
-
+    private GameObject _mina;           //мина
     [SerializeField]
-    private Transform startPosition;    //откуда будут появлятся пули
+    private Transform _startPosition;   //откуда будут появлятся пули
+    [SerializeField]
+    private LayerMask _hitMask;         //какие слои мы можем повреждать
     
 	void Update () {
         //выстрелы
 		if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
         {
-            if (bullet != null)
+            if (_bullet != null)
             {
-                var b = Instantiate(bullet, startPosition.position, Quaternion.identity);
-                b.GetComponent<BulletController>().direction = gameObject.GetComponent<PlayerMove>().Direction;
+                var b = Instantiate(_bullet, _startPosition.position, Quaternion.identity);
+                BulletController bulletController = b.GetComponent<BulletController>();
+                //в каком направлении будет двигаться пуля
+                bulletController.Direction = gameObject.GetComponent<PlayerMove>().Direction;
+                //с каким слоями будет взаимодействовать пуля
+                bulletController.HitMask = _hitMask;
             }
         }
 
         //мина
         if (Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1))
         {
-            if (mina != null)
+            if (_mina != null)
             {
-                Instantiate(mina, startPosition.position, Quaternion.identity);
+                Instantiate(_mina, _startPosition.position, Quaternion.identity);
             }
         }
 	}
