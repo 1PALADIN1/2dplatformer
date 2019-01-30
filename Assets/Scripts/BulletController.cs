@@ -27,14 +27,12 @@ public class BulletController : MonoBehaviour {
         //если есть столкновения с кем-то из списка слоёв
         if (_raycastHit2d.collider != null)
         {
-            if (_raycastHit2d.collider.tag.Equals("Enemy"))
+            Health hitHealth = _raycastHit2d.collider.GetComponent<Health>();
+            //если есть компонент здоровья на объекте
+            if (hitHealth != null)
             {
-                Health enemyHealth = _raycastHit2d.collider.GetComponent<Health>();
-                //если у противника есть компонента здоровья, то наносим противнику урон
-                if (enemyHealth != null)
-                {
-                    enemyHealth.TakeDamage(Damage);
-                }
+                //наносим урон
+                hitHealth.TakeDamage(Damage);
             }
             Destroy(gameObject);
         }
