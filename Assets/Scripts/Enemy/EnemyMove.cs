@@ -23,6 +23,7 @@ public class EnemyMove : MonoBehaviour
     private Rigidbody2D _rigidbody2d;               //компонент Rigidbody
     private Vector2 _moveTemp;                      //темповый вектор для перемещения
     private float _startX;                          //начальная координата по оси X
+    private EnemyAttack _enemyAttack;               //объект для атаки игрока
 
     /// <summary>
     /// Куда смотрит враг: 1 - вправо, -1 - влево
@@ -40,6 +41,7 @@ public class EnemyMove : MonoBehaviour
     void Start ()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
+        _enemyAttack = GetComponent<EnemyAttack>();
         _moveTemp = new Vector2();
         //запоминаем стартовую позицию
         _startX = transform.position.x;
@@ -57,16 +59,24 @@ public class EnemyMove : MonoBehaviour
             if (_raycastFront.collider.gameObject.tag.Equals("Player"))
             {
                 if (_raycastFront.distance > _attackDistance)
+                {
                     Move();
+                }
+                //пытаемся атаковать игрока
+                if (!_enemyAttack.CanShoot) _enemyAttack.CanShoot = true;
             }
             else
             {
                 TryReturnToStartPosition();
+                //больше не атакуем игрока
+                if (_enemyAttack.CanShoot) _enemyAttack.CanShoot = false;
             }
         }
         else
         {
             TryReturnToStartPosition();
+            //больше не атакуем игрока
+            if (_enemyAttack.CanShoot) _enemyAttack.CanShoot = false;
         }
 
 
@@ -78,7 +88,6 @@ public class EnemyMove : MonoBehaviour
                 //разворачиваемся
                 Flip();
             }
-
         }
 
         //DEBUG

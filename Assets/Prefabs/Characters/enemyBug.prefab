@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61721607991641048}
   - component: {fileID: 114920333391119850}
   - component: {fileID: 114966310851035616}
+  - component: {fileID: 114658193615687206}
   m_Layer: 11
   m_Name: enemyBug
   m_TagString: Enemy
@@ -118,6 +119,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.86, y: 1.12}
   m_EdgeRadius: 0
+--- !u!114 &114658193615687206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189529160981002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d22c29291f6a5428cea666412d3b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 1082084250968000, guid: 5c8fc43f5fc60924daa26ae27d9fd557, type: 2}
+  _startPosition: {fileID: 4067165535219994}
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 1536
+  _waitTime: 2
 --- !u!114 &114920333391119850
 MonoBehaviour:
   m_ObjectHideFlags: 1
