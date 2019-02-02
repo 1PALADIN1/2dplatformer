@@ -3,21 +3,21 @@
 public class PlayerMove : MonoBehaviour
 {
     [HideInInspector]
-    public bool facingRight = true;         //куда смотрит игрок? по умолчанию вправо
+    public bool FacingRight = true;         //куда смотрит игрок? по умолчанию вправо
     [HideInInspector]
-    public bool jump = false;               //нажата ли клавиша прыжка
+    public bool Jump = false;               //нажата ли клавиша прыжка
 
     [SerializeField]
-    private float moveSpeed = 20.0f;        //скорость перемещения игрока
+    private float _moveSpeed = 20.0f;        //скорость перемещения игрока
     [SerializeField]
-    private float jumpForce = 1000f;        //сила прыжка
+    private float _jumpForce = 1000f;        //сила прыжка
 
-    private Rigidbody2D rigidbody2d;        //компонент Rigidbody объекта
-    private Transform groundCheck;
-    private bool grounded = false;          //стоит ли игрок на земле
-    private Animator animator;              //компонент Animator объекта
-    private Vector2 verticalMove;           //темповый вектор для перемещения (чтобы не плодить тысячу объектов типа Vector2)
-    private bool blockControl = false;      //заблокировано ли польховательское управление
+    private Rigidbody2D _rigidbody2d;        //компонент Rigidbody объекта
+    private Transform _groundCheck;
+    private bool _grounded = false;          //стоит ли игрок на земле
+    private Animator _animator;              //компонент Animator объекта
+    private Vector2 _verticalMove;           //темповый вектор для перемещения (чтобы не плодить тысячу объектов типа Vector2)
+    private bool _blockControl = false;      //заблокировано ли польховательское управление
 
     /// <summary>
     /// Блокирует пользовательский контроль над персонажем (например, для автоматических сценариев)
@@ -26,11 +26,11 @@ public class PlayerMove : MonoBehaviour
     {
         get
         {
-            return blockControl;
+            return _blockControl;
         }
         set
         {
-            blockControl = value;
+            _blockControl = value;
         }
     }
 
@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
     {
         get
         {
-            if (facingRight) return 1;
+            if (FacingRight) return 1;
             else
                 return -1;
         }
@@ -49,47 +49,47 @@ public class PlayerMove : MonoBehaviour
     
     void Awake ()
     {
-        rigidbody2d = GetComponent<Rigidbody2D>();
-        groundCheck = transform.Find("groundCheck");
-        animator = GetComponent<Animator>();
-        verticalMove = new Vector2();
+        _rigidbody2d = GetComponent<Rigidbody2D>();
+        _groundCheck = transform.Find("groundCheck");
+        _animator = GetComponent<Animator>();
+        _verticalMove = new Vector2();
     }
 
 	void Update ()
     {
         //проверка соприкасается ли игрок с землёй
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        if (!blockControl)
+        _grounded = Physics2D.Linecast(transform.position, _groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        if (!_blockControl)
         {
-            if (Input.GetButtonDown("Jump") && grounded)
-                jump = true;
+            if (Input.GetButtonDown("Jump") && _grounded)
+                Jump = true;
         }
     }
 
     private void FixedUpdate()
     {
-        if (!blockControl)
+        if (!_blockControl)
         {
             //чтение ввода
             var axisHor = Input.GetAxis("Horizontal");
 
             //передаём в аниматор текущее значение axis по модулю (для смены анимации с Idle -> Run и наоборот)
-            animator.SetFloat("speed", Mathf.Abs(axisHor));
+            _animator.SetFloat("speed", Mathf.Abs(axisHor));
             //перемещение объекта
-            verticalMove.Set(axisHor * moveSpeed, rigidbody2d.velocity.y);
-            rigidbody2d.velocity = verticalMove; //устанавливаем скорость перемещения
+            _verticalMove.Set(axisHor * _moveSpeed, _rigidbody2d.velocity.y);
+            _rigidbody2d.velocity = _verticalMove; //устанавливаем скорость перемещения
 
-            if (axisHor > 0 && !facingRight)
+            if (axisHor > 0 && !FacingRight)
                 Flip();
-            else if (axisHor < 0 && facingRight)
+            else if (axisHor < 0 && FacingRight)
                 Flip();
         }
 
         //обработка прыжка
-        if (jump)
+        if (Jump)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-            jump = false;
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, _jumpForce));
+            Jump = false;
         }
     }
 
@@ -98,7 +98,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     void Flip()
     {
-        facingRight = !facingRight;
+        FacingRight = !FacingRight;
         
         //получаем вектор масштабирования
         Vector3 theScale = transform.localScale;
