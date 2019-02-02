@@ -57,12 +57,14 @@ public class PlayerMove : MonoBehaviour
 
 	void Update ()
     {
-        //проверка соприкасается ли игрок с землёй
-        _grounded = Physics2D.Linecast(transform.position, _groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         if (!_blockControl)
         {
             if (Input.GetButtonDown("Jump") && _grounded)
+            {
                 Jump = true;
+                //_animator.SetTrigger("toJump");
+                _animator.SetBool("jump", Jump);
+            }
         }
     }
 
@@ -73,8 +75,15 @@ public class PlayerMove : MonoBehaviour
             //чтение ввода
             var axisHor = Input.GetAxis("Horizontal");
 
+            //проверка соприкасается ли игрок с землёй
+            _grounded = Physics2D.Linecast(transform.position, _groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
             //передаём в аниматор текущее значение axis по модулю (для смены анимации с Idle -> Run и наоборот)
             _animator.SetFloat("speed", Mathf.Abs(axisHor));
+            //передаём скорость игрока по вертикали, чтобы сделать переходы анимации прыжка
+            _animator.SetFloat("vspeed", Mathf.Abs(_rigidbody2d.velocity.y));
+            _animator.SetBool("grounded", _grounded);
+
             //перемещение объекта
             _verticalMove.Set(axisHor * _moveSpeed, _rigidbody2d.velocity.y);
             _rigidbody2d.velocity = _verticalMove; //устанавливаем скорость перемещения
@@ -90,8 +99,18 @@ public class PlayerMove : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, _jumpForce));
             Jump = false;
+            Invoke("UnsetJump", 0.5f);
         }
     }
+
+    /// <summary>
+    /// Сброс прыжка в аниматоре
+    /// </summary>
+    private void UnsetJump()
+    {
+        _animator.SetBool("jump", false);
+    }
+
 
     /// <summary>
     /// Зеркальное отражение спрайта (разворот)
