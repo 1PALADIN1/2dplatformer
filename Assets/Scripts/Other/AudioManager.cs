@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private AudioSource _audioSource;
-    private Queue<AudioClip> audios;            //очередь воспроизводимых звуков
+    [SerializeField]
+    private int _sourcesNumber = 20;            //количество источников звука
+    
+    private Queue<AudioClip> _audios;           //очередь воспроизводимых звуков
+    private List<AudioSource> _audioSources;    //список источников звуков
+
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
-        audios = new Queue<AudioClip>();
+        _audios = new Queue<AudioClip>();
+        _audioSources = new List<AudioSource>();
+
+        //наполняем список источниками звука
+        for (int i = 0; i < _sourcesNumber; i++)
+        {
+            _audioSources.Add(gameObject.AddComponent<AudioSource>());
+        }
     }
 	
 	private void Update ()
     {
         //если в очереди есть звуки, то воспроизводим их
         //а потом удаляем из неё
-		if (audios.Count != 0)
+		if (_audios.Count != 0)
         {
-            _audioSource.clip = audios.Dequeue();
-            _audioSource.Play();
+            AudioSource src = FindEmptySource();
+            if (src != null)
+            {
+                src.clip = _audios.Dequeue();
+                src.Play();
+            }
         }
 	}
 
@@ -30,6 +44,20 @@ public class AudioManager : MonoBehaviour
     /// <param name="audioClip">Фрагмент звука</param>
     public void AddSound(AudioClip audioClip)
     {
-        audios.Enqueue(audioClip);
+        _audios.Enqueue(audioClip);
+    }
+
+    /// <summary>
+    /// Ищет свободный источник звука (для распараллеливания воспроизведения звуков)
+    /// </summary>
+    /// <returns>Возвращает свободный источник звука</returns>
+    private AudioSource FindEmptySource()
+    {
+        foreach (var src in _audioSources)
+        {
+            if (!src.isPlaying)
+                return src;
+        }
+        return null;
     }
 }
