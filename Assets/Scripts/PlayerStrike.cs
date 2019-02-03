@@ -10,8 +10,18 @@ public class PlayerStrike : MonoBehaviour {
     private Transform _startPosition;   //откуда будут появлятся пули
     [SerializeField]
     private LayerMask _hitMask;         //какие слои мы можем повреждать
-    
-	void Update () {
+    [SerializeField]
+    private AudioClip _shotAudio;       //звук выстрела
+
+    private AudioManager _audioManager; //менеджер звуков
+
+    private void Start()
+    {
+        //получаем аудиоменеджер
+        _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
+
+    private void Update () {
         //выстрелы
 		if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
         {
@@ -23,6 +33,10 @@ public class PlayerStrike : MonoBehaviour {
                 bulletController.Direction = gameObject.GetComponent<PlayerMove>().Direction;
                 //с каким слоями будет взаимодействовать пуля
                 bulletController.HitMask = _hitMask;
+
+                //звук выстрела
+                if (_audioManager != null)
+                    _audioManager.AddSound(_shotAudio);
             }
         }
 

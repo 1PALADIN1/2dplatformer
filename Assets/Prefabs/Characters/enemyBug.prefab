@@ -155,6 +155,7 @@ MonoBehaviour:
     m_Bits: 1536
   _waitTime: 2
   _damage: 2
+  _shotAudio: {fileID: 8300000, guid: 8d54e24898da2134d82c831384efe01e, type: 3}
 --- !u!114 &114920333391119850
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -173,6 +173,7 @@ MonoBehaviour:
   _hitMask:
     serializedVersion: 2
     m_Bits: 2560
+  _shotAudio: {fileID: 8300000, guid: d6b2cf87671440648b1c7658eb33e0c3, type: 3}
 --- !u!114 &114919210810191698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,10 +197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837fb1b4f879afd498ac9816af85136b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  facingRight: 1
-  jump: 0
-  moveSpeed: 12
-  jumpForce: 700
+  FacingRight: 1
+  Jump: 0
+  _moveSpeed: 15
+  _jumpForce: 700
 --- !u!212 &212892913175593602
 SpriteRenderer:
   m_ObjectHideFlags: 1
