@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4250793194092342}
   - component: {fileID: 212244214505463152}
+  - component: {fileID: 95363118333384808}
   - component: {fileID: 50306746945130754}
   - component: {fileID: 61721607991641048}
   - component: {fileID: 114920333391119850}
@@ -67,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1189529160981002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.7799072, y: -2.3310456, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4067165535219994}
@@ -108,7 +109,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.73}
   m_SpriteTilingProperty:
-    border: {x: 0.9076923, y: 0.16153847, z: 0.8384615, w: 0.44615385}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.06}
     oldSize: {x: 3.9384615, y: 1.9692308}
     newSize: {x: 5.12, y: 2.56}
@@ -119,6 +120,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.86, y: 1.12}
   m_EdgeRadius: 0
+--- !u!95 &95363118333384808
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189529160981002}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0f86c5dcaf3f364f996c7623dcbcc57, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114658193615687206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,6 +154,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   _waitTime: 2
+  _damage: 2
 --- !u!114 &114920333391119850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff00f1e22cb82042962903e4388fec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
+  _maxHealth: 10
 --- !u!114 &114966310851035616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,7 +221,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: bc24450d5448b46468e6f3d47eea5409, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 07cf44e6e11a58348811a0809eb6422b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

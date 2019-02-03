@@ -24,6 +24,7 @@ public class EnemyMove : MonoBehaviour
     private Vector2 _moveTemp;                      //темповый вектор для перемещения
     private float _startX;                          //начальная координата по оси X
     private EnemyAttack _enemyAttack;               //объект для атаки игрока
+    private Animator _animator;                     //компонент аниматора
 
     /// <summary>
     /// Куда смотрит враг: 1 - вправо, -1 - влево
@@ -42,6 +43,7 @@ public class EnemyMove : MonoBehaviour
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
         _enemyAttack = GetComponent<EnemyAttack>();
+        _animator = GetComponent<Animator>();
         _moveTemp = new Vector2();
         //запоминаем стартовую позицию
         _startX = transform.position.x;
@@ -52,6 +54,9 @@ public class EnemyMove : MonoBehaviour
         //пускаем лучи 
         _raycastFront = Physics2D.Raycast(_startPosition.position, Vector2.right, _observeFront * Direction, _checkMask);
         _raycastBack = Physics2D.Raycast(_startPosition.position, Vector2.left, _observeBack * Direction, _checkMask);
+
+        //передаём нужные значения в аниматор
+        _animator.SetFloat("speed", Mathf.Abs(_rigidbody2d.velocity.x));
 
         if (_raycastFront.collider != null)
         {
