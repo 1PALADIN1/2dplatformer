@@ -12,13 +12,19 @@ public class PlayerStrike : MonoBehaviour {
     private LayerMask _hitMask;         //какие слои мы можем повреждать
     [SerializeField]
     private AudioClip _shotAudio;       //звук выстрела
+    [SerializeField]
+    private GameObject _shotParticleGO;
 
     private AudioManager _audioManager; //менеджер звуков
+    private ParticleSystem _shotParticle;
 
     private void Start()
     {
         //получаем аудиоменеджер
         _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        //получаем компонент частиц
+        if (_shotParticleGO != null)
+            _shotParticle = _shotParticleGO.GetComponent<ParticleSystem>();
     }
 
     private void Update () {
@@ -37,6 +43,10 @@ public class PlayerStrike : MonoBehaviour {
                 //звук выстрела
                 if (_audioManager != null)
                     _audioManager.AddSound(_shotAudio);
+
+                //дым из ствола при выстреле
+                if (_shotParticle != null)
+                    _shotParticle.Play();
             }
         }
 
