@@ -12,8 +12,11 @@ public class EnemyAttack : MonoBehaviour
     private float _waitTime = 2.0f;         //промежуток времени между выстрелами
     [SerializeField]
     private int _damage = 2;                //сила атаки
+    [SerializeField]
+    private AudioClip _shotAudio;           //звук атаки
     
     private bool _canShoot = false;         //может ли противник стрелять
+    private AudioManager _audioManager;     //менеджер звуков
 
     /// <summary>
     /// Свойство для управления стрельбой извне
@@ -33,7 +36,9 @@ public class EnemyAttack : MonoBehaviour
     void Start ()
     {
         InvokeRepeating("Shoot", _waitTime, _waitTime);
-	}
+        //получаем аудиоменеджер
+        _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
 
     /// <summary>
     /// Разрешить стрелять противнику
@@ -67,6 +72,10 @@ public class EnemyAttack : MonoBehaviour
             bulletController.Damage = _damage;
             //с каким слоями будет взаимодействовать пуля
             bulletController.HitMask = _hitMask;
+
+            //звук выстрела
+            if (_audioManager != null)
+                _audioManager.AddSound(_shotAudio);
         }
     }
 }
