@@ -134,6 +134,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1024
+  _msgSound: {fileID: 8300000, guid: 0998b3a358b22834f84365b1dae60f06, type: 3}
 --- !u!114 &114548573576777316
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -14,13 +14,18 @@ public class HelperScript : MonoBehaviour
     private float _touchRadius;         //радиус столкновения с игроком (внутри него становится видимым канвас)
     [SerializeField]
     private LayerMask _layerMask;       //с кем сталкиваясь отображаем подсказки
+    [SerializeField]
+    private AudioClip _msgSound;        //звук при сообщении
 
     private RaycastHit2D _raycastHit2D;
+    private AudioManager _audioManager; //менеджер звуков
 
-	private void Start ()
+    private void Start ()
     {
         _textComponent.text = _textMessage;
-	}
+        if (_msgSound != null)
+            _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+    }
 
     private void FixedUpdate()
     {
@@ -34,8 +39,13 @@ public class HelperScript : MonoBehaviour
             if (!_canvas.enabled)
             {
                 _canvas.enabled = true;
+                //TODO убрать этот дикий костыль! Господи, как же мне стыдно!!!
                 _textComponent.resizeTextForBestFit = true;
                 _textComponent.resizeTextForBestFit = false;
+
+                //проигрываем звук
+                if (_msgSound != null)
+                    _audioManager.AddSound(_msgSound);
             }
         }
         else
