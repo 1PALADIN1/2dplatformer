@@ -23,7 +23,6 @@ public class FinishLevelScript : MonoBehaviour
         {
             if (_controller != null)
             {
-                if (_nextLevel.Equals("Finish")) return;
                 _controller.GotoLevel(_nextLevel);
             }
         }

@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 
     private float _backupScaleTime;         //сохраняем таймскейл
     private PlayerMove _playerMove;         //компонента перемещения игрока
+    private bool _isGameFinish = false;
+    private GameObject _finishObject;
 
     /// <summary>
     /// На паузе ли игра (свойство)
@@ -26,6 +28,9 @@ public class GameController : MonoBehaviour
     {
         _backupScaleTime = Time.timeScale;
         if (_isGameScene) _playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>();
+        _finishObject = GameObject.FindGameObjectWithTag("FinishGame");
+        if (_finishObject != null)
+            _finishObject.SetActive(false);
     }
 
     void Update ()
@@ -45,6 +50,11 @@ public class GameController : MonoBehaviour
                 else
                     PauseGame();
             }
+        }
+
+        if (_isGameFinish && Input.GetKeyDown(KeyCode.E))
+        {
+            GotoLevel("MainMenu");
         }
     }
 
@@ -98,6 +108,16 @@ public class GameController : MonoBehaviour
     public void GotoLevel(string levelName)
     {
         if (GamePaused) Time.timeScale = _backupScaleTime;
-        SceneManager.LoadScene(levelName);
+
+        if (levelName.Equals("Finish")) FinishGame();
+        else
+            SceneManager.LoadScene(levelName);
+    }
+
+    private void FinishGame()
+    {
+        _isGameScene = false;
+        _isGameFinish = true;
+        _finishObject.SetActive(true);
     }
 }

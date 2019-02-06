@@ -9,6 +9,7 @@ TagManager:
   - AudioManager
   - PlayerHPGUI
   - Menu
+  - FinishGame
   layers:
   - Default
   - TransparentFX
