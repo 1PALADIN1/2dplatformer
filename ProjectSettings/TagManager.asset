@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - AudioManager
   - PlayerHPGUI
+  - Menu
   layers:
   - Default
   - TransparentFX
