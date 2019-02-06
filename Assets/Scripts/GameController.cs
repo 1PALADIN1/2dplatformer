@@ -5,6 +5,8 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private GameObject _menu;               //менюшка паузы
+    [SerializeField]
+    private bool _isGameScene = true;       //игровая ли сцена с участием игрока?
 
     private float _backupScaleTime;         //сохраняем таймскейл
     private PlayerMove _playerMove;         //компонента перемещения игрока
@@ -23,23 +25,26 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         _backupScaleTime = Time.timeScale;
-        _playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>();
+        if (_isGameScene) _playerMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>();
     }
 
     void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-            ExitGame();
-
-        if (Input.GetKeyDown(KeyCode.R))
-            ReloadLevel();
-
-        if (Input.GetKeyDown(KeyCode.P))
+        if (_isGameScene)
         {
-            if (Time.timeScale == 0)
-                ContinueGame();
-            else
-                PauseGame();
+            if (Input.GetKeyDown(KeyCode.Q))
+                ExitGame();
+
+            if (Input.GetKeyDown(KeyCode.R))
+                ReloadLevel();
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (Time.timeScale == 0)
+                    ContinueGame();
+                else
+                    PauseGame();
+            }
         }
     }
 
@@ -84,5 +89,15 @@ public class GameController : MonoBehaviour
         Time.timeScale = _backupScaleTime;
         if (_menu != null) _menu.SetActive(false);
         if (_playerMove != null) _playerMove.BlockControl = false;
+    }
+
+    /// <summary>
+    /// Переход на уровень по названию
+    /// </summary>
+    /// <param name="levelName">Название уровня</param>
+    public void GotoLevel(string levelName)
+    {
+        if (GamePaused) Time.timeScale = _backupScaleTime;
+        SceneManager.LoadScene(levelName);
     }
 }
