@@ -12,6 +12,17 @@ public class Health : MonoBehaviour
     private int _healthPercent;         //текущий уровень здоровья в процентах
     private Slider _hpSlider;           //GUI для жизней игрока
 
+    /// <summary>
+    /// Получаем текущий уровень здоровья объекта
+    /// </summary>
+    public int CurrentHP
+    {
+        get
+        {
+            return _health;
+        }
+    }
+
     private void Start()
     {
         _health = _maxHealth;
