@@ -119,5 +119,6 @@ public class GameController : MonoBehaviour
         _isGameScene = false;
         _isGameFinish = true;
         _finishObject.SetActive(true);
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().SetBackMusic(1);
     }
 }
