@@ -1,18 +1,33 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Health : MonoBehaviour {
+public class Health : MonoBehaviour
+{
 
     [SerializeField]
     private int _maxHealth = 10;        //максимальный уровень здоровья
 
     private int _health;                //текущий уровень здоровья
     private int _healthPercent;         //текущий уровень здоровья в процентах
+    private Slider _hpSlider;           //GUI для жизней игрока
+
+    /// <summary>
+    /// Получаем текущий уровень здоровья объекта
+    /// </summary>
+    public int CurrentHP
+    {
+        get
+        {
+            return _health;
+        }
+    }
 
     private void Start()
     {
         _health = _maxHealth;
+        //получаем слайдер для отрисовки хп
+        _hpSlider = GameObject.FindGameObjectWithTag("PlayerHPGUI").GetComponent<Slider>();
         CountHealth();
     }
 
@@ -35,20 +50,6 @@ public class Health : MonoBehaviour {
     }
 
     /// <summary>
-    /// Вывод жизней в процентах
-    /// </summary>
-    private void OnGUI()
-    {
-        //жизни игрока
-        if (gameObject.tag.Equals("Player"))
-        {
-            GUI.Box(new Rect(0, 0, 110, 40), "Player");
-            GUI.Label(new Rect(10, 20, 100, 20), "HP: " + _healthPercent + "%");
-        }
-            
-    }
-
-    /// <summary>
     /// Вычисляем жизни в процентах
     /// </summary>
     private void CountHealth()
@@ -57,5 +58,13 @@ public class Health : MonoBehaviour {
         float fmaxHealth = _maxHealth;
 
         _healthPercent = (int)(fhealth / fmaxHealth * 100);
+
+        //для отрисовки хп
+        if (gameObject.tag.Equals("Player"))
+        {
+            if (fhealth < 0) fhealth = 0;
+            if (_hpSlider != null)
+                _hpSlider.value = fhealth / fmaxHealth;
+        }
     }
 }

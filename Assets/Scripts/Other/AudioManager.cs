@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     [SerializeField]
     private int _sourcesNumber = 20;            //количество источников звука
+    [SerializeField]
+    private AudioClip[] _backMusic;             //массив музыки, которая играет в фоне
     
     private Queue<AudioClip> _audios;           //очередь воспроизводимых звуков
     private List<AudioSource> _audioSources;    //список источников звуков
-
+    private AudioSource _backSource;
 
     private void Start()
     {
@@ -20,6 +21,13 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < _sourcesNumber; i++)
         {
             _audioSources.Add(gameObject.AddComponent<AudioSource>());
+        }
+
+        _backSource = gameObject.AddComponent<AudioSource>();
+        _backSource.volume = 0.3f;
+        if (_backMusic.Length > 0)
+        {
+            SetBackMusic(0);
         }
     }
 	
@@ -45,6 +53,16 @@ public class AudioManager : MonoBehaviour
     public void AddSound(AudioClip audioClip)
     {
         _audios.Enqueue(audioClip);
+    }
+
+    /// <summary>
+    /// Устанавливает фоновую музыку
+    /// </summary>
+    /// <param name="i">Номер музыкального клипа в массиве</param>
+    public void SetBackMusic(int num)
+    {
+        _backSource.clip = _backMusic[num];
+        _backSource.Play();
     }
 
     /// <summary>

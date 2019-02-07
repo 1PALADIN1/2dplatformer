@@ -17,6 +17,7 @@ public class PlayerStrike : MonoBehaviour {
 
     private AudioManager _audioManager; //менеджер звуков
     private ParticleSystem _shotParticle;
+    private PlayerMove _playerMove;     //компонент, отвечающий за перемещение игрока
 
     private void Start()
     {
@@ -25,13 +26,16 @@ public class PlayerStrike : MonoBehaviour {
         //получаем компонент частиц
         if (_shotParticleGO != null)
             _shotParticle = _shotParticleGO.GetComponent<ParticleSystem>();
+
+        _playerMove = GetComponent<PlayerMove>();
     }
 
-    private void Update () {
+    private void Update ()
+    {
         //выстрелы
 		if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
         {
-            if (_bullet != null)
+            if (_bullet != null && !_playerMove.BlockControl)
             {
                 var b = Instantiate(_bullet, _startPosition.position, Quaternion.identity);
                 BulletController bulletController = b.GetComponent<BulletController>();
@@ -53,10 +57,8 @@ public class PlayerStrike : MonoBehaviour {
         //мина
         if (Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1))
         {
-            if (_mina != null)
-            {
+            if (_mina != null && !_playerMove.BlockControl)
                 Instantiate(_mina, _startPosition.position, Quaternion.identity);
-            }
         }
 	}
 }
