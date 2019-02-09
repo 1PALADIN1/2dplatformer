@@ -352,10 +352,10 @@ RectTransform:
   m_Father: {fileID: 824104678}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.351, y: 0.5}
-  m_AnchorMax: {x: 0.65029037, y: 0.5}
-  m_AnchoredPosition: {x: -0.49749756, y: 0}
-  m_SizeDelta: {x: -0.05000305, y: 234}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0025024414, y: 0}
+  m_SizeDelta: {x: 230.95001, y: 234}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &641534864
 MonoBehaviour:
@@ -755,7 +755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0766878, y: 0.38000003}
   m_AnchorMax: {x: 0.897, y: 0.91}
-  m_AnchoredPosition: {x: 0.9875107, y: 1.1899986}
+  m_AnchoredPosition: {x: 0.9875183, y: 1.1899986}
   m_SizeDelta: {x: 0.025020123, y: 1.4000015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135032383
@@ -897,7 +897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.284, y: 0.42400002}
   m_AnchorMax: {x: 0.716, y: 0.64000005}
-  m_AnchoredPosition: {x: 0.00005340576, y: 1.5999985}
+  m_AnchoredPosition: {x: 0.000045776367, y: 1.5999985}
   m_SizeDelta: {x: 2, y: 0.34000397}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1178650677
@@ -1228,10 +1228,10 @@ RectTransform:
   m_Father: {fileID: 824104678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.351, y: 0.5}
-  m_AnchorMax: {x: 0.65029037, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.5, y: 0}
-  m_SizeDelta: {x: 1, y: 234}
+  m_SizeDelta: {x: 231, y: 234}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519679001
 MonoBehaviour:
@@ -1300,7 +1300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.284, y: 0.044000003}
   m_AnchorMax: {x: 0.716, y: 0.252}
-  m_AnchoredPosition: {x: 0.00005340576, y: 0.5}
+  m_AnchoredPosition: {x: 0.000045776367, y: 0.5}
   m_SizeDelta: {x: 2, y: 2.340004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568941998
