@@ -3,19 +3,19 @@
 public class Mina : MonoBehaviour
 {
     [SerializeField]
-    private int damage = 5;                         //урон
+    private int _damage = 5;                        //урон
     [SerializeField]
-    private float pushForce = 10.0f;                //сила отталкивания
+    private float _pushForce = 10.0f;               //сила отталкивания
     [SerializeField]
-    private float delay = 2.0f;                     //задержка при создании мины (активируется только через это время)
+    private float _delay = 2.0f;                    //задержка при создании мины (активируется только через это время)
 
-    private BoxCollider2D boxCollider;              //коллайдер для мины (если игрок/противник наступит)
-    private CircleCollider2D circleCollider;        //радиус поражения
+    private BoxCollider2D _boxCollider;             //коллайдер для мины (если игрок/противник наступит)
+    private CircleCollider2D _circleCollider;       //радиус поражения
     
 	void Start ()
     {
-        circleCollider = gameObject.GetComponent<CircleCollider2D>();
-        boxCollider = gameObject.GetComponent<BoxCollider2D>();
+        _circleCollider = gameObject.GetComponent<CircleCollider2D>();
+        _boxCollider = gameObject.GetComponent<BoxCollider2D>();
 	}
 
     /// <summary>
@@ -36,13 +36,13 @@ public class Mina : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 //отталкиваем объекты
                 Vector3 tmp = (collision.transform.position - transform.position).normalized;
-                rb.AddForce(new Vector2(tmp.x * pushForce, tmp.y * pushForce), ForceMode2D.Impulse);
+                rb.AddForce(new Vector2(tmp.x * _pushForce, tmp.y * _pushForce), ForceMode2D.Impulse);
 
                 print(tmp + " " + collision.gameObject.tag);
             }
             //наносим урон
             if (health != null)
-                health.TakeDamage(damage);
+                health.TakeDamage(_damage);
         }
 
         Destroy(gameObject);
@@ -54,9 +54,9 @@ public class Mina : MonoBehaviour
     /// <param name="collision">Объект Collision2D того, кто наступил</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Enemy") || collision.gameObject.tag.Equals("Player"))
+        if (collision.gameObject.tag.Equals("Enemy"))
         {
-            circleCollider.enabled = true;
+            _circleCollider.enabled = true;
         }
     }
 }
