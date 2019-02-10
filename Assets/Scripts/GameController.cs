@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class GameController : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class GameController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
                 ReloadLevel();
 
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) || CrossPlatformInputManager.GetButtonDown("Pause"))
             {
                 if (Time.timeScale == 0)
                     ContinueGame();
@@ -52,7 +53,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (_isGameFinish && Input.GetKeyDown(KeyCode.E))
+        if (_isGameFinish && (Input.GetKeyDown(KeyCode.E) || CrossPlatformInputManager.GetButtonDown("Fire")))
         {
             GotoLevel("MainMenu");
         }
