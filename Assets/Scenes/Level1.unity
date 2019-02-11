@@ -306,6 +306,10 @@ Prefab:
       propertyPath: m_Text
       value: JUMP
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9529ecc3d479da5499993355e6c2cb4f, type: 2}
   m_IsPrefabParent: 0
@@ -12431,6 +12435,16 @@ Prefab:
     - target: {fileID: 4292433694243058, guid: ac87041821e688c4d9faf554deb2edd2, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114996373219900446, guid: ac87041821e688c4d9faf554deb2edd2,
+        type: 2}
+      propertyPath: _mobileControl
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114530081428141372, guid: ac87041821e688c4d9faf554deb2edd2,
+        type: 2}
+      propertyPath: _mobileControl
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac87041821e688c4d9faf554deb2edd2, type: 2}
