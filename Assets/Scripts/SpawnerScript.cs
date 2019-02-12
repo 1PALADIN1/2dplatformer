@@ -1,20 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SpawnerScript : MonoBehaviour {
+public class SpawnerScript : MonoBehaviour
+{
 
     [SerializeField]
-    private GameObject spawnObject;         //объект, который спаунется
+    private GameObject _spawnObject;            //объект, который спаунется
+    [SerializeField]
+    private float _spawnTime = 2.0f;            //время спауна
 
-    private GameObject watchObject;         //переменная для наблюдения за объектом
+    private GameObject _watchObject;            //переменная для наблюдения за объектом
+    private bool _canInvokeSpawn = false;       //можно ли спаунить
+
+    private void Start()
+    {
+        //сразу же создаём противника
+        Spawn();
+    }
 
     private void Update()
     {
         //если не за кем наблюдать, то создаём объект 
-        if (watchObject == null)
+        if (_watchObject == null && _canInvokeSpawn)
         {
-            Spawn();
+            Invoke("Spawn", _spawnTime);
+            _canInvokeSpawn = false;
         }
     }
 
@@ -23,10 +32,11 @@ public class SpawnerScript : MonoBehaviour {
     /// </summary>
     public void Spawn()
     {
-        if (spawnObject != null)
+        if (_spawnObject != null)
         {
             //создаём новый объект и запоминаем на него ссылку
-            watchObject = Instantiate(spawnObject, transform);
+            _watchObject = Instantiate(_spawnObject, transform);
+            _canInvokeSpawn = true;
         }
     }
 }

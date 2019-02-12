@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerStrike : MonoBehaviour {
-
+public class PlayerStrike : MonoBehaviour
+{
     [SerializeField]
     private GameObject _bullet;         //пуля
     [SerializeField]
@@ -14,6 +15,8 @@ public class PlayerStrike : MonoBehaviour {
     private AudioClip _shotAudio;       //звук выстрела
     [SerializeField]
     private GameObject _shotParticleGO;
+    [SerializeField]
+    private bool _mobileControl = true; //управление с мобилки?
 
     private AudioManager _audioManager; //менеджер звуков
     private ParticleSystem _shotParticle;
@@ -33,7 +36,14 @@ public class PlayerStrike : MonoBehaviour {
     private void Update ()
     {
         //выстрелы
-		if (Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0))
+        bool isShooting = false;
+
+        if (_mobileControl) isShooting = CrossPlatformInputManager.GetButtonDown("Fire");
+        else
+            isShooting = Input.GetKeyDown(KeyCode.J) || Input.GetMouseButtonDown(0);
+
+
+        if (isShooting)
         {
             if (_bullet != null && !_playerMove.BlockControl)
             {
@@ -55,7 +65,7 @@ public class PlayerStrike : MonoBehaviour {
         }
 
         //мина
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1))
+        if ((Input.GetKeyDown(KeyCode.I) || Input.GetMouseButtonDown(1)) && !_mobileControl)
         {
             if (_mina != null && !_playerMove.BlockControl)
                 Instantiate(_mina, _startPosition.position, Quaternion.identity);

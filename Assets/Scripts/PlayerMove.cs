@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerMove : MonoBehaviour
     private float _moveSpeed = 20.0f;        //скорость перемещения игрока
     [SerializeField]
     private float _jumpForce = 1000f;        //сила прыжка
+    [SerializeField]
+    private bool _mobileControl = true;      //управление с мобилки?
 
     private Rigidbody2D _rigidbody2d;        //компонент Rigidbody объекта
     private Transform _groundCheck;
@@ -59,7 +62,13 @@ public class PlayerMove : MonoBehaviour
     {
         if (!_blockControl)
         {
-            if (Input.GetButtonDown("Jump") && _grounded)
+            bool isJumped = false;
+
+            if (_mobileControl) isJumped = CrossPlatformInputManager.GetButtonDown("Jump") ;
+            else
+                isJumped = Input.GetButtonDown("Jump");
+
+            if (isJumped && _grounded)
             {
                 Jump = true;
                 //_animator.SetTrigger("toJump");
@@ -73,7 +82,10 @@ public class PlayerMove : MonoBehaviour
         if (!_blockControl)
         {
             //чтение ввода
-            var axisHor = Input.GetAxis("Horizontal");
+            float axisHor = 0.0f;
+            if (_mobileControl) axisHor = CrossPlatformInputManager.GetAxis("Horizontal");
+            else
+                axisHor  = Input.GetAxis("Horizontal");
 
             //проверка соприкасается ли игрок с землёй
             _grounded = Physics2D.Linecast(transform.position, _groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
